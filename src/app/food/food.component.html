@@ -1,0 +1,8 @@
+<div>
+  <input #foodName type="text" />
+  <button (click)="onFoodCreate(foodName)">Add</button>
+</div>
+<ul>
+  <li *ngFor="let food of getFoods() | async">{{ food.name }}  <button (click)="onFoodRemove(food)">[X]</button></li>
+</ul>
+
