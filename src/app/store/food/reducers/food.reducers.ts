@@ -25,8 +25,8 @@ export function reducer(state = initialState, action: FoodAction) {
       };
     }
     case FoodActionTypes.CREATE_FOOD_SUCCESS: {
-      const updatedFoodName = action.payload;
-      const updatedFoods = state.foods.map(food => {
+      const updatedFoodName = action.payload.toString();
+      const updatedFoods: Food[] = state.foods.map(food => {
         return food.name.toUpperCase() === updatedFoodName ?
           Object.assign({}, food, {name: updatedFoodName}) :
           Object.assign({}, food);

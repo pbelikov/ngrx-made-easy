@@ -1,9 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {FoodActionTypes} from '../actions/food.actions';
+import {FoodAction, FoodActionTypes} from '../actions/food.actions';
 import {map, switchMap} from 'rxjs/internal/operators';
 import {ApiService} from '../../../api/api.service';
-import {Action} from '@ngrx/store';
 
 @Injectable()
 export class FoodEffects {
@@ -17,11 +16,14 @@ export class FoodEffects {
     // Listen to CREATE_FOOD action
     ofType(FoodActionTypes.CREATE_FOOD),
     // Fetch payload
-    map(action => action.payload),
+    map((action: FoodAction) => action.payload),
     // Call API or any other desired stuff
-    switchMap(payload => this.apiService.run(payload ? payload.name : null).pipe(
+    switchMap(payload => this.apiService.run(payload ? payload['name'] : null).pipe(
         map(result =>  {
-          return {type: FoodActionTypes.CREATE_FOOD_SUCCESS, payload: result}
+          return {
+            type: FoodActionTypes.CREATE_FOOD_SUCCESS,
+            payload: result
+          };
         })
       )
     )
