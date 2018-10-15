@@ -1,5 +1,6 @@
 import * as fromFood from './food';
 import {createSelector} from '@ngrx/store';
+import {FoodEffects} from './food/effects/food.effects';
 
 /**
  * Make a map of states
@@ -15,6 +16,14 @@ export const reducers = {
   food: fromFood.reducer
 };
 
-export const getFood = (state: State) => state.food;
+/**
+ * Export selectors
+ */
 
+export const getFood = (state: State) => state.food;
 export const getFoods = createSelector(getFood, fromFood.getFoods);
+
+/**
+ * Export effects
+ */
+export const rootEffects = [FoodEffects];

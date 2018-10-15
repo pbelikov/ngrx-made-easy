@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import {AppRoutingModule} from "./routes/app-routing.module";
 import {FoodModule} from "./food/food.module";
 import {StoreModule} from "@ngrx/store";
-import {reducers} from './store';
+import {reducers, rootEffects} from './store';
+import {EffectsModule} from '@ngrx/effects';
+import {ApiModule} from './api/api.module';
 
 
 @NgModule({
@@ -20,9 +22,17 @@ import {reducers} from './store';
      */
     AppRoutingModule,
     /**
-     * Prepares root reducer
+     * Prepares root reducer and inits the store
      */
     StoreModule.forRoot(reducers),
+    /**
+     * Effects
+     */
+    EffectsModule.forRoot(rootEffects),
+    /**
+     * API
+     */
+    ApiModule,
     /**
      * Actual application module
      */

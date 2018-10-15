@@ -24,6 +24,18 @@ export function reducer(state = initialState, action: FoodAction) {
         foods: [...state.foods, Object.assign({}, newFood, {id: _.uniqueId()})]
       };
     }
+    case FoodActionTypes.CREATE_FOOD_SUCCESS: {
+      const updatedFoodName = action.payload;
+      const updatedFoods = state.foods.map(food => {
+        return food.name.toUpperCase() === updatedFoodName ?
+          Object.assign({}, food, {name: updatedFoodName}) :
+          Object.assign({}, food);
+      });
+      return {
+        ...state,
+        foods: [...updatedFoods]
+      };
+    }
     case FoodActionTypes.REMOVE_FOOD: {
       const foodId = action.payload;
       return {
