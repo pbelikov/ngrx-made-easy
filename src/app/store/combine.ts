@@ -6,7 +6,7 @@ import {FoodEffects} from './food/effects/food.effects';
  * Make a map of states
  */
 export interface State {
-  food: fromFood.State
+  food: fromFood.State;
 }
 
 /**
@@ -20,8 +20,7 @@ export const reducers = {
  * Export selectors
  */
 
-export const getFood = (state: State) => state.food;
-export const getFoods = createSelector(getFood, fromFood.getFoods);
+export * from './selectors/store.selectors';
 
 /**
  * Export effects
