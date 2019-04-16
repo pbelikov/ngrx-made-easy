@@ -5,14 +5,14 @@ import {Food} from "../../../models/food.model";
 import {State, initialState} from '../state/food.state';
 
 export class FoodReducers {
-  static createFood(state: State, payload: any) {
+  static createFood(state: State, payload: any): State {
     return {
       ...state,
       foods: [...state.foods, Object.assign({}, payload, {id: _.uniqueId()})]
     };
   }
 
-  static createFoodSuccess(state: State, payload: string) {
+  static createFoodSuccess(state: State, payload: string): State {
     const updatedFoods: Food[] = state.foods.map(food => {
       return food.name.toUpperCase() === payload ?
         Object.assign({}, food, {name: payload}) :
@@ -24,7 +24,7 @@ export class FoodReducers {
     };
   }
 
-  static removeFood(state: State, payload: number) {
+  static removeFood(state: State, payload: number): State {
     return {
       ...state,
       foods: [...state.foods.filter(f => f.id != payload)]
@@ -37,7 +37,7 @@ actionExecutors.set(FoodActionTypes.CREATE_FOOD, FoodReducers.createFood);
 actionExecutors.set(FoodActionTypes.CREATE_FOOD_SUCCESS, FoodReducers.createFoodSuccess);
 actionExecutors.set(FoodActionTypes.REMOVE_FOOD, FoodReducers.removeFood);
 
-export function reducer(state = initialState, action: FoodAction) {
+export function reducer(state = initialState, action: FoodAction): State {
   if (!actionExecutors.get(action.type)) {
     return state;
   }
