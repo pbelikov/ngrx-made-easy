@@ -32,7 +32,7 @@ export class FoodReducers {
   }
 }
 
-export function reducer(state = initialState, action: FoodAction) {
+export function reducer(state = initialState, action: FoodAction): State {
   switch (action.type) {
     case FoodActionTypes.CREATE_FOOD: {
       return FoodReducers.createFood(state, action.payload);
